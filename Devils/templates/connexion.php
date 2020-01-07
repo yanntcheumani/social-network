@@ -1,5 +1,9 @@
+<?php
+    include("../back/connect_back.php");
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<title>Devil's</title>
 		<!-- Latest compiled and minified CSS -->
@@ -31,7 +35,14 @@
 
 							<div class="form-group text-centert">
 								<input type="submit" name="submit_confirm_connexion" class="btn form-control border-0" style="background-color: #ff00ff;">
-							</div>
+                                <?php
+                                    $error = NULL;
+                                    if (isset($_POST["submit_confirm_connexion"]))
+                                        $error = connection($_POST["uname"], $_POST["pwd"]);
+							        if ($error != NULL)
+							            echo '<p style="color: red">'.$error.'</p>';
+							        ?>
+                            </div>
 						</form>
 					</div>
 				</div>

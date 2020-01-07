@@ -1,3 +1,17 @@
+<?php
+    include_once "../back/connect_back.php";
+    if (!isset($_GET["id"])) {
+        http_response_code(401);
+        $_SESSION = array();
+        session_destroy();
+        header("Location: connexion.php");
+    }
+    $userinfos = get_infos_user(htmlspecialchars($_GET["id"]));
+    if ($userinfos == NULL) {
+        http_response_code(404);
+        header("Location: connexion.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,8 +19,7 @@
 		<!-- Latest compiled and minified CSS --->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<!--<link rel="stylesheet" type="text/css" href="public/navbar_profil_publication.css">
-
-		<!-- link for icon-->
+		link for icon-->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
@@ -17,7 +30,7 @@
 			max-height: 250px;
 		}
 	</style>
-	<body class="bg-white" style="margin: 0px;">
+	<body class="bg-white" style="margin: 0;">
 		<!--affichage pour les ecrans extra large-->
 		<section class="bg-black m-0 p-0 d-none d-xl-block">
 			<nav class="navbar navbar-expand-xl navbar-dark bg-info">
@@ -96,7 +109,7 @@
 									<img src="../man.png" class="rounded-circle" width="75">
 								</div>
 								<div class="col-5 text-center mt-4 ml-2 card-title">
-									John Doe
+									<?= $userinfos["username"] ?>
 								</div>
 								<div class="col-3 mt-4 float-right ml-2">
 
@@ -235,10 +248,12 @@
 								</div>
 							</div>-->
 							<div class="card-text">
-								<p style="font-size: 15px; ">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in </p>
+                                <?php
+                                    if ($userinfos["bio"] == NULL)
+                                        echo "<p style='font-size: 15px; color: grey'> aucune biographie</p>";
+                                    else
+                                        echo "<p style=\"font-size: 15px; \">".$userinfos["bio"]."</p>";
+                                    ?>
 							</div>
 						</div>
 
@@ -872,12 +887,12 @@
 					<div class="row mb-5">
 						<div class="col-4 pb-2 w-100">
 							<a href="publication.php">
-								<img src="../logo_php.png" style="max-width: 500px; max-height: 300px;">
+								<img src="../logo_php.png" style="max-width: 500px; max-height: 300px;" alt="bonjour">
 							</a>
 						</div>
 						<div class="col-4 pb-2">
 							<a href="publication.php">
-								<img src="../logo_php.png" style="width: auto; max-width: 500px; max-height: 300px;">
+								<img src="../logo_php.png" style="width: auto; max-width: 500px; max-height: 300px;" alt="bonjour">
 							</a>
 						</div>
 						<div class="col-4 pb-2">

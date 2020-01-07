@@ -1,3 +1,7 @@
+<?php
+    include_once "../back/connect_back.php"
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,7 +41,7 @@
 
 							<div class="form-group">
 							  	<label for="birthday" class="col-form-label">Date</label><br/>
-							  	<input class="form-control border-right-0 border-left-0 border-top-0" type="date" value="<?php date('Y-M-D') ?>" id="birthday" required>
+							  	<input class="form-control border-right-0 border-left-0 border-top-0" type="date" value="<?php date('Y-M-D') ?>" id="birthday" name="birthday" required>
 							    <div class="valid-feedback">Valid.</div>
 							    <div class="invalid-feedback">Champs vide.</div>
 							</div>
@@ -46,6 +50,13 @@
 
 							<div class="form-group text-centert">
 								<input type="submit" name="submit_confirm_register" class="btn form-control border-0" style="background-color: #ff00ff;">
+                                <?php
+                                    if (isset($_POST["submit_confirm_register"])) {
+                                        $error = sign_in($_POST["mail"], $_POST["pwd"], $_POST["uname"], $_POST["birthday"]);
+                                        if (isset($error))
+                                            echo $error;
+                                    }
+                                    ?>
 							</div>
 						</form>
 					</div>
