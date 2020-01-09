@@ -48,7 +48,7 @@ function sign_in($email, $pwd, $uname, $birthday)
             $req_signin = $bdd->prepare("insert into membres(username, pasword, email, birthday) VALUES(?, ?, ?, ?)");
 
             if ($req_signin->execute(array($uname, $pwd, $email, $birthday)))
-                $error = "<p style='color: green'> bravo vous êtes inscris cliquez <a href='connexion.php'>ici </a>pour vous connecter</p>";
+                $error = "<p style='color: green'> bravo vous êtes inscris cliquez <a href='../templates/connexion.php'>ici </a>pour vous connecter</p>";
             else
                 $error = "oups... désoler une erreur c'est produite lors de votre inscription veuillez recommencez s'il vous plaît";
         }else

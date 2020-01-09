@@ -1,5 +1,6 @@
 <?php
     include_once "../back/connect_back.php";
+
     if (!isset($_GET["id"])) {
         http_response_code(401);
         $_SESSION = array();
@@ -13,7 +14,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<title>Devil's</title>
 		<!-- Latest compiled and minified CSS --->
@@ -90,8 +91,8 @@
 
 			        </ul>
 			        <form class="form-inline my-2 my-md-0">
-			          <input class="form-control" style="width: 500px;" type="text" placeholder="Search">
-			        </form>
+                        <input class="form-control" style="width: 500px;" type="text" placeholder="Search">
+                    </form>
 			      </div>
 			</nav>
 
@@ -266,50 +267,28 @@
 						</div>
 						<div class="card-body bg-white scroll">
 							<ul class="w-100 list-group">
-							  	<li class="border-bottom pb-1" style="list-style-type: none; ">
-							  		<div class="row">
-								  		<div class="col-4 mb-1">
-								  			<img src="../female-user.png" class="rounded-circle" width="75">
-								  		</div>
-										<div class="col-4 mt-3 mb-1">John Doe</div>
-							  			<div class="col-4 mt-2">
-							  				<button class="btn bg-primary mb-1">follow</button>
-							  			</div>
-							  		</div>
-							  	</li>
-							  	<li class="border-bottom pt-2" style="list-style-type: none; ">
-							  		<div class="row">
-								  		<div class="col-4 mb-1">
-								  			<img src="../female-user.png" class="rounded-circle" width="75">
-								  		</div>
-										<div class="col-4 mt-3 mb-1">John Doe</div>
-							  			<div class="col-4 mt-2">
-							  				<button class="btn bg-primary mb-1">follow</button>
-							  			</div>
-							  		</div>
-							  	</li>
-							  	<li class="border-bottom pb-1" style="list-style-type: none; ">
-							  		<div class="row">
-								  		<div class="col-4 mb-1">
-								  			<img src="../female-user.png" class="rounded-circle" width="75">
-								  		</div>
-										<div class="col-4 mt-3 mb-1">John Doe</div>
-							  			<div class="col-4 mt-2">
-							  				<button class="btn bg-primary mb-1">follow</button>
-							  			</div>
-							  		</div>
-							  	</li>
-							  	<li class="border-bottom pt-2" style="list-style-type: none; ">
-							  		<div class="row">
-								  		<div class="col-4 mb-1">
-								  			<img src="../female-user.png" class="rounded-circle" width="75">
-								  		</div>
-										<div class="col-4 mt-3 mb-1">John Doe</div>
-							  			<div class="col-4 mt-2">
-							  				<button class="btn bg-primary mb-1">follow</button>
-							  			</div>
-							  		</div>
-							  	</li>
+                                <?php while($infos_followers = get_followers($_GET["id"])):?>
+                                    <?php if ($infos_followers != NULL):?>
+                                        <li class="border-bottom pb-1" style="list-style-type: none; ">
+                                            <div class="row">
+                                                <div class="col-4 mb-1">
+                                                    <img src="../female-user.png" class="rounded-circle" width="75">
+                                                </div>
+                                                <div class="col-4 mt-3 mb-1"><?= $infos_followers["username"] ?></div>
+                                                <div class="col-4 mt-2">
+                                                    <button class="btn bg-primary mb-1">follow</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if ($infos_followers == NULL):?>
+                                        <li class="border-bottom pb-1" style="list-style-type: none; ">
+                                            <div class="row">
+                                                <p style="color: gray"> pas de followers</p>
+                                            </div>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endwhile;?>
 							</ul>
 						</div>
 					</div>
@@ -323,28 +302,29 @@
 						</div>
 						<div class="card-body bg-white scroll">
 							<ul class="w-100 list-group">
-							  	<li class="border-bottom pb-1" style="list-style-type: none; ">
-							  		<div class="row">
-								  		<div class="col-4 mb-1">
-								  			<img src="../female-user.png" class="rounded-circle" width="75">
-								  		</div>
-										<div class="col-4 mt-3 mb-1">John Doe</div>
-							  			<div class="col-4 mt-2">
-							  				<button class="btn bg-primary mb-1">follow</button>
-							  			</div>
-							  		</div>
-							  	</li>
-							  	<li class="border-bottom pt-2" style="list-style-type: none; ">
-							  		<div class="row">
-								  		<div class="col-4 mb-1">
-								  			<img src="../female-user.png" class="rounded-circle" width="75">
-								  		</div>
-										<div class="col-4 mt-3 mb-1">John Doe</div>
-							  			<div class="col-4 mt-2">
-							  				<button class="btn bg-primary mb-1">follow</button>
-							  			</div>
-							  		</div>
-							  	</li>
+
+                                <?php while($infos_followings = get_following($_GET["id"])):?>
+                                    <?php if ($infos_followings != NULL):?>
+                                        <li class="border-bottom pb-1" style="list-style-type: none; ">
+                                            <div class="row">
+                                                <div class="col-4 mb-1">
+                                                    <img src="../female-user.png" class="rounded-circle" width="75">
+                                                </div>
+                                                <div class="col-4 mt-3 mb-1">John Doe</div>
+                                                <div class="col-4 mt-2">
+                                                    <button class="btn bg-primary mb-1">follow</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if ($infos_followers == NULL):?>
+                                        <li class="border-bottom pb-1" style="list-style-type: none; ">
+                                            <div class="row">
+                                                <p style="color: gray"> pas de followers</p>
+                                            </div>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endwhile; ?>
 							</ul>
 						</div>
 					</div>
@@ -394,7 +374,7 @@
 							<div class="media p-3">
 								<img src="../man.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" width="75">
 								<div class="media-body">
-									<h4>John Doe <small></br><i>Posted on February 19, 2016</i></small></h4>
+									<h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
 								</div>
 							  	<div class="float-right">
 
