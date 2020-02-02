@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Devil's</title>
+		<title>ymedia</title>
 		<!-- Latest compiled and minified CSS --->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<!--<link rel="stylesheet" type="text/css" href="public/navbar_profil_publication.css">
